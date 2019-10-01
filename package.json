@@ -1,0 +1,39 @@
+{
+  "name": "troll-of-fame",
+  "version": "0.1.0",
+  "description": "Troll of fame : a property based testing workshop project",
+  "license": "MIT",
+  "esy": {
+    "build": "refmterr dune build -p #{self.name}",
+    "NOTE": "Optional release Section. Customizes result of `esy release`",
+    "release": {
+      "bin": [
+        "Fame"
+      ]
+    },
+    "buildEnv": {
+      "ODOC_SYNTAX": "re"
+    }
+  },
+  "scripts": {
+    "test": "esy x Fame",
+    "doc": "esy dune build @doc"
+  },
+  "dependencies": {
+    "@esy-ocaml/reason": ">= 3.4.0 < 3.6.0",
+    "@opam/dune": "*",
+    "@opam/ppx_deriving": "4.4",
+    "@opam/qcheck-core": "0.9",
+    "@reason-native/console": "*",
+    "@reason-native/pastel": "*",
+    "@reason-native/qcheck-rely": "^1.0.2",
+    "@reason-native/rely": "*",
+    "ocaml": "~4.6.0",
+    "refmterr": "*"
+  },
+  "devDependencies": {
+    "@opam/merlin": "*",
+    "ocaml": "~4.6.0",
+    "@opam/odoc": "*"
+  }
+}

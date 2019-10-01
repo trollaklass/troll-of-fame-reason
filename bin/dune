@@ -1,0 +1,6 @@
+(executable
+  (name Fame)
+  (libraries console.lib pastel.lib lib)
+
+  (public_name Fame))
+  
