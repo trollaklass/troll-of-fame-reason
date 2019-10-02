@@ -17,4 +17,4 @@ type t = {
 };
 
 /* put a + */
-let value = elf => role_to_enum(elf.role) + race_to_enum(elf.race);
+let value = elf => role_to_enum(elf.role) * race_to_enum(elf.race);
