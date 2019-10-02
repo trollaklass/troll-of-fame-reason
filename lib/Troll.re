@@ -1,4 +1,3 @@
-
 module Killed = Map.Make(Elf);
 
 type score = int;
@@ -16,20 +15,15 @@ let scoring: t => score =
 
 let modify_score: (option(kill) => option(kill), Elf.t, t) => t =
   (modifier, elf, troll) => {
-    let how_much = Killed.find_opt(elf, troll.kills);
-    let new_kills =
-      switch (modifier(how_much)) {
-      | Some(0) => Killed.remove(elf, troll.kills)
-      | Some(hits) => Killed.update(elf, modifier, troll.kills)
-      | None => troll.kills /* Oops nothing to do */
-      };
-    {...troll, kills: new_kills};
+    {name: troll.name, kills: Killed.update(elf, modifier, troll.kills)};
   };
 
 let optional_add: (option(kill), option(kill)) => option(kill) =
   (a, b) => {
     switch (a, b) {
-    | (Some(x), Some(y)) => Some(x + y)
+    | (Some(x), None) => x > 0 ? a : None
+    | (Some(x), Some(y)) => x + y > 0 ? Some(x + y) : None
+    | (None, Some(y)) => y > 0 ? b : None
     | _ => None
     };
   };
@@ -46,5 +40,5 @@ let oops_he_survived = i_got(-1);
 let all_elves_of_a_kind_resurrected: (Elf.t, t) => t =
   (elf, troll) => {
     let without_resurected = Killed.remove(elf, troll.kills);
-    {...troll, kills: without_resurected};
+    {name: troll.name, kills: without_resurected};
   };
