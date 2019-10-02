@@ -9,7 +9,7 @@ type t = {
 };
 let scoring: t => score =
   troll => {
-    Killed.fold((k, v, accum) => Elf.value(k) * v + accum, troll.kills, 0);
+    Killed.fold((k, v, accum) => Elf.value(k) * v, troll.kills, 0);
   };
 
 let modify_score: (option(kill) => option(kill), Elf.t, t) => t =
@@ -38,8 +38,8 @@ let oops_he_survived: (Elf.t, t) => t = i_got(-1);
 
 let all_elves_of_a_kind_resurrected: (Elf.t, t) => t =
   (elf, troll) => {
-    let without_resurected = Killed.remove(elf, troll.kills);
-    {name: troll.name, kills: without_resurected};
+    let _without_resurected = Killed.remove(elf, troll.kills);
+    {name: troll.name, kills: Killed.empty};
   };
 
 let all_elves_resurrected: t => t =
