@@ -20,9 +20,9 @@ let modify_score: (option(kill) => option(kill), Elf.t, t) => t =
 let optional_add: (option(kill), option(kill)) => option(kill) =
   (a, b) => {
     switch (a, b) {
-    | (Some(x), None) => x > 0 ? a : None
-    | (Some(x), Some(y)) => x + y > 0 ? Some(x + y) : None
-    | (None, Some(y)) => y > 0 ? b : None
+    | (Some(x), None) => a
+    | (Some(x), Some(y)) => Some(x + y)
+    | (None, Some(y)) => b
     | _ => None
     };
   };

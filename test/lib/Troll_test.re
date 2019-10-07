@@ -29,13 +29,13 @@ describe("Troll test suite", ({test}) => {
     let aklass_after = i_got_one(faeor, aklass_before);
     expect.int(Killed.find(faeor, aklass_after.kills)).toBe(1);
   });
-  test("oops_he_survived should remove faeor", ({expect}) => {
+  test(
+    "score after oops_he_survived should be the same as before", ({expect}) => {
     let faeor = Lib.Elf.{role: Swordsman, race: DarkElf};
     let aklass_before = {name: "Aklass", kills: Killed.empty};
-    let aklass_kills_of_faeor =
-      (i_got_one(faeor, aklass_before) |> oops_he_survived(faeor)).kills
-      |> Killed.find_opt(faeor);
-    expect.equal(aklass_kills_of_faeor, None);
+    let aklass_after =
+      i_got_one(faeor, aklass_before) |> oops_he_survived(faeor);
+    expect.equal(scoring(aklass_after), scoring(aklass_before));
   });
   test("empty kills should score 0", ({expect}) => {
     let aklass = {name: "Aklass", kills: Killed.empty};
@@ -47,12 +47,11 @@ describe("Troll test suite", ({test}) => {
     let counter: int = i_got_one(faeor, aklass).kills |> Killed.find(faeor);
     expect.int(counter).toBe(1);
   });
-  test("miss them when no kill should have no kill", ({expect}) => {
+  test(
+    "scoring should be 0 when a warlock ressurect every elves ", ({expect}) => {
     let faeor = Lib.Elf.{role: Swordsman, race: DarkElf};
     let aklass = {name: "Aklass", kills: Killed.empty};
-    let counter =
-      (i_got_one(faeor, aklass) |> oops_he_survived(faeor)).kills
-      |> Killed.find_opt(faeor);
-    expect.equal(counter, None);
+    let score = scoring(i_got_one(faeor, aklass) |> all_elves_resurrected);
+    expect.equal(score, 0);
   });
 });
