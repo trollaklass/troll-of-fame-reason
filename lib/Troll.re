@@ -38,8 +38,8 @@ let oops_he_survived: (Elf.t, t) => t = i_got(-1);
 
 let all_elves_of_a_kind_resurrected: (Elf.t, t) => t =
   (elf, troll) => {
-    let _without_resurected = Killed.remove(elf, troll.kills);
-    {name: troll.name, kills: Killed.empty};
+    let without_resurected = Killed.remove(elf, troll.kills);
+    {name: troll.name, kills: without_resurected};
   };
 
 let all_elves_resurrected: t => t =
