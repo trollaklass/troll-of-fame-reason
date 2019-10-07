@@ -19,10 +19,10 @@ describe("Elf Invariance", ({test}) => {
       |> expect.ext.qCheckTest;
       ();
     })
-    /* test("Elf value should always be the product of race and role", ({expect}) => {
+    /* test("The value of a High elf must be an even number", ({expect}) => {
          QCheck.Test.make(
            ~count=1000,
-           ~name="Elf value should always be the product of race and role",
+           ~name="The value of a High elf must be an even number",
            elf_high_arbitrary,
            elf =>
            value(elf) mod 2 === 0
