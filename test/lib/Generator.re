@@ -3,6 +3,7 @@ open QCheck.Gen;
 
 module type MFantasy = {
   let elf_arbitrary: QCheck.arbitrary(Lib.Elf.t);
+  let elf_high_arbitrary: QCheck.arbitrary(Lib.Elf.t);
   let troll_arbitrary: QCheck.arbitrary(Lib.Troll.t);
 };
 
@@ -17,7 +18,16 @@ module Fantasy: MFantasy = {
       >|= (pair => from_pair(pair))
     );
 
-  let elf_arbitrary = QCheck.make(elf_gen);
+  let elf_high_gen =
+    Elf.(
+      pair(oneofl([Swordsman, Archer, Warlock, Priest]), pure(HighElf))
+      >|= (pair => from_pair(pair))
+    );
+
+  let elf_print = elf => Elf.show(elf) |> QCheck.Print.string;
+  let elf_arbitrary = QCheck.make(~print=elf_print, elf_gen);
+
+  let elf_high_arbitrary = QCheck.make(~print=elf_print, elf_high_gen);
 
   let name_gen = string(~gen=QCheck.Gen.printable);
 
@@ -57,6 +67,7 @@ module Fantasy: MFantasy = {
       ((name, kills)) =>
         Troll.{name, kills: list_killed_to_map_killed(kills)}
     );
+  let troll_print = troll => Troll.show(troll) |> QCheck.Print.string;
 
-  let troll_arbitrary = QCheck.make(troll_gen);
+  let troll_arbitrary = QCheck.make(~print=troll_print, troll_gen);
 };

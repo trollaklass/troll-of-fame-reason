@@ -45,6 +45,8 @@ In ReasonML, we use `qcheck-rely` library to write and run Property Based tests.
 
 #### Step 1 - Configuration and Invariance
 
+![invariant](./invariant.png)
+
 - For a simpler start, we already configured the build dependencies and created generators for `Elf` and `Troll` in the test lib.
 - PBT tests are located in [Elf_prop.re](./test/lib/Elf_prop.re) and [Troll_prop.re](./test/lib/Troll_prop.re)
 
@@ -100,6 +102,8 @@ describe("Elf Invariance", ({test}) => {
 
 Inverse properties check that it's possible to transform some input to an output and back to the original input, no matter the input. This is a useful property because it guarantees some functions don't lose information and/or are consistent.
 
+![inverse](./inverse.png)
+
 - For any `Troll` and any `Elf`, if the `Troll` kills the `Elf` and then realizes the elf survived, what should be the result?
 - Write an inverse property test to check that
 
@@ -108,6 +112,8 @@ Testing it will ensure that `i_got_one` and `oops_he_survived` are consistent.
 #### Step 3 - Analogy
 
 Analogous properties check that there are at least 2 different ways from any input to reach an output. This is a useful property because it guarantees some functions are consistent (can also be useful for refactors)
+
+![analogy](./analogy1.png)
 
 For any troll, any elf and any positive quantity of killed elves, what should be the difference between:
 
@@ -118,12 +124,18 @@ Write an analogous property test to check that
 
 This ensures that `i_got_one` and `i_got` are consistent.
 
+![analogy](./analogy2.png)
+
 #### Step 4 - Idempotence
 
 Idempotent properties check that running a function once or several times leads to exactly the same result, i.e. an idempotent function brings to a stable state from which this function becomes useless.
 
+![idempotence](./idempotence1.png)
+
 - For any `Troll` and any `Elf`, once all elves have been resurrected, what should happen if these elves are resurrected again?
 - Write an idempotent property test to check that
+
+![idempotence](./idempotence2.png)
 
 This ensures that `all_elves_of_a_kind_resurrected` brings the `Troll` killing list to a stable state (i.e. many call should have the same result as once).
 

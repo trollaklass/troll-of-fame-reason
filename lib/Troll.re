@@ -1,12 +1,20 @@
 module Killed = Map.Make(Elf);
+let kills_to_string = ks =>
+  Killed.fold(
+    (k, v, accum) => Elf.show(k) ++ " : " ++ string_of_int(v),
+    ks,
+    "",
+  );
 
 type score = int;
 type kill = int;
-
+[@deriving show]
 type t = {
   name: string,
+  [@printer (fmt, k) => Format.pp_print_string(fmt, kills_to_string(k))]
   kills: Killed.t(kill),
 };
+
 let scoring: t => score =
   troll => {
     Killed.fold((k, v, accum) => Elf.value(k) * v, troll.kills, 0);
