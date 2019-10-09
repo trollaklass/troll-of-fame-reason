@@ -12,7 +12,7 @@ This project use [ReasonML](https://reasonml.github.io) with [esy](https://esy.s
 
 Nota Bene : If you're using VS Code, you should install [OCaml and Reason IDE](https://marketplace.visualstudio.com/items?itemName=freebroccolo.reasonml) and enable the parameter _Reason › Codelens: Enabled_
 
-## Once upon a time ...
+## Once upon a time ⋯
 
 The King of the Trolls Gnonpom coded the **Troll of Fame** : a wonderfull application that would help Trolls to learn numbers when they are hunting.
 Gnonpom was a hard skilled Test Driven Developer king who just released **ToF** when all tests passed Green.
@@ -23,7 +23,7 @@ Here come a new King, Hurrah for the great Troll Aklass!
 
 This time it's decided, the elf hunting contest is launched!
 
-At the end of each battle, the trolls want to compare the number and attributes of the slain elves. And with **ToF** it will be easy ... maybe.
+At the end of each battle, the trolls want to compare the number and attributes of the slain elves. And with **ToF** it should be easy ⋯ Should.
 
 ## Excercices
 
@@ -33,7 +33,7 @@ You inherit an application that seems to work fine. Run `esy x Runner` (•̀ᴗ
 
 Read [Elf_test.re](./test/lib/Elf_test.re) and [Troll_test.re](./test/lib/Troll_test.re) as a first specification of the software.
 
-Now uncomment the content of [Elf_prop.re](./test/lib/Elf_prop.re) and run tests again `esy x Runner`... Ooops seems that our unit tests was not so complete. (╥﹏╥)
+Now uncomment the content of [Elf_prop.re](./test/lib/Elf_prop.re) and run tests again `esy x Runner` ⋯ Ooops seems that our unit tests was not so complete. (╥﹏╥)
 
 We will try to improve the quality of _Troll of Frame_ thanks to Property Based Testing
 
@@ -46,6 +46,7 @@ In ReasonML, we use `qcheck-rely` library to write and run Property Based tests.
 #### Step 1 - Configuration and Invariance
 
 ![invariant](./invariant.png)
+_No matter the year, the 31st of December is a New Year's Eve_
 
 - For a simpler start, we already configured the build dependencies and created generators for `Elf` and `Troll` in the test lib.
 - PBT tests are located in [Elf_prop.re](./test/lib/Elf_prop.re) and [Troll_prop.re](./test/lib/Troll_prop.re)
@@ -103,6 +104,7 @@ describe("Elf Invariance", ({test}) => {
 Inverse properties check that it's possible to transform some input to an output and back to the original input, no matter the input. This is a useful property because it guarantees some functions don't lose information and/or are consistent.
 
 ![inverse](./inverse.png)
+_`bar` and `foo` are inverse of each other_
 
 - For any `Troll` and any `Elf`, if the `Troll` kills the `Elf` and then realizes the elf survived, what should be the result?
 - Write an inverse property test to check that
@@ -114,6 +116,7 @@ Testing it will ensure that `i_got_one` and `oops_he_survived` are consistent.
 Analogous properties check that there are at least 2 different ways from any input to reach an output. This is a useful property because it guarantees some functions are consistent (can also be useful for refactors)
 
 ![analogy](./analogy1.png)
+_Adding any number to itself is the same as multiplying this number by 2_
 
 For any troll, any elf and any positive quantity of killed elves, what should be the difference between:
 
@@ -125,17 +128,20 @@ Write an analogous property test to check that
 This ensures that `i_got_one` and `i_got` are consistent.
 
 ![analogy](./analogy2.png)
+_For refactors, copy the function to refactor, do your changes, then write an Analogy property test to check for any input that they return the same output, i.e. the refactor has no regression! Now you can delete the test and the legacy function, and rename the refactored function to the legacy name_
 
 #### Step 4 - Idempotence
 
 Idempotent properties check that running a function once or several times leads to exactly the same result, i.e. an idempotent function brings to a stable state from which this function becomes useless.
 
 ![idempotence](./idempotence1.png)
+_Once a list of numbers is sorted, sorting it again doesn't change anything_
 
 - For any `Troll` and any `Elf`, once all elves have been resurrected, what should happen if these elves are resurrected again?
 - Write an idempotent property test to check that
 
 ![idempotence](./idempotence2.png)
+_More generally, `function` is idempotent if applying it to its own result doesn't change anything_
 
 This ensures that `all_elves_of_a_kind_resurrected` brings the `Troll` killing list to a stable state (i.e. many call should have the same result as once).
 
