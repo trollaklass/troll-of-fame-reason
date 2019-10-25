@@ -32,7 +32,7 @@ module Fantasy: MFantasy = {
   let name_gen = string(~gen=QCheck.Gen.printable);
 
   let kill_gen =
-    pair(elf_gen, pint)
+    pair(elf_gen, nat)
     >|= (
       pair => {
         let (key, value) = pair;
