@@ -5,6 +5,11 @@ module type MFantasy = {
   let elf_arbitrary: QCheck.arbitrary(Lib.Elf.t);
   let elf_high_arbitrary: QCheck.arbitrary(Lib.Elf.t);
   let troll_arbitrary: QCheck.arbitrary(Lib.Troll.t);
+  let troll_elf_arbitrary: QCheck.arbitrary((Lib.Troll.t, Lib.Elf.t));
+  let troll_elf_int_arbitrary:
+    QCheck.arbitrary((Lib.Troll.t, Lib.Elf.t, int));
+  let troll_two_elves_arbitrary:
+    QCheck.arbitrary((Lib.Troll.t, Lib.Elf.t, Lib.Elf.t));
 };
 
 module Fantasy: MFantasy = {
@@ -70,4 +75,9 @@ module Fantasy: MFantasy = {
   let troll_print = troll => Troll.show(troll) |> QCheck.Print.string;
 
   let troll_arbitrary = QCheck.make(~print=troll_print, troll_gen);
+  let troll_elf_arbitrary = QCheck.pair(troll_arbitrary, elf_arbitrary);
+  let troll_elf_int_arbitrary =
+    QCheck.triple(troll_arbitrary, elf_arbitrary, QCheck.small_nat);
+  let troll_two_elves_arbitrary =
+    QCheck.triple(troll_arbitrary, elf_arbitrary, elf_arbitrary);
 };
