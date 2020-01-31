@@ -1,6 +1,6 @@
 # Troll of Fame - ReasonML training
 
-This project use [ReasonML](https://reasonml.github.io) with [esy](https://esy.sh/) workflow and [Dune](https://github.com/ocaml/dune) build system.
+This project uses [ReasonML](https://reasonml.github.io) with [esy](https://esy.sh/) workflow and [Dune](https://github.com/ocaml/dune) build system.
 
 ## Getting started
 
@@ -14,12 +14,12 @@ Nota Bene : If you're using VS Code, you should install [OCaml and Reason IDE](h
 
 ## Once upon a time ⋯
 
-The King of the Trolls Gnonpom coded the **Troll of Fame** : a wonderfull application that would help Trolls to learn numbers when they are hunting.
+The King of the Trolls Gnonpom coded the **Troll of Fame** : a wonderful application that would help Trolls learn numbers when they are hunting.
 Gnonpom was a hard skilled Test Driven Developer king who just released **ToF** when all tests passed Green.
 
-Sadly he was shooted by a disgusting Elf.
+Sadly he was shot by a disgusting Elf.
 
-Here come a new King, Hurrah for the great Troll Aklass!
+Here comes a new King, Hurrah for the great Troll Aklass!
 
 This time it's decided, the elf hunting contest is launched!
 
